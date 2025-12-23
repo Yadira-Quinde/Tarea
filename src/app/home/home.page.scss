@@ -25,3 +25,8 @@
 #container a {
   text-decoration: none;
 }
+
+ion-avatar {
+  --width: 600px;  /* Cambia el valor al tamaño que desees */
+  --height: 600px;
+}
