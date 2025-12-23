@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { IonAvatar, IonItem, IonLabel } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-home',
@@ -15,13 +14,15 @@ export class HomePage {
   
   imagenAvatar: string = 'https://ionicframework.com/docs/img/demos/avatar.svg';
   
-  descripcion: string = 'Sin descripción';
+  descripcion: string = 'Agregar descripción';
   nuevaDescripcion: string = '';
   editandoDesc: boolean = false;
 
-  celular: string = 'Sin número';
+  celular: string = 'Agregar celular';
   nuevoCelular: string = '';
   editandoCel: boolean = false;
+
+  mensajeError: string = '';
 
   constructor() {}
 
@@ -30,7 +31,7 @@ export class HomePage {
     this.nuevoNombre = this.nombreUsuario;
     this.editando = true;
   }
-
+  
   guardarNombre() {
     this.nombreUsuario = this.nuevoNombre;
     this.editando = false;
@@ -41,20 +42,22 @@ export class HomePage {
   }
   
   // Lógica para la Descripción
-  abrirEdicionDesc() {
+  abrirDesc() {
     this.nuevaDescripcion = this.descripcion;
     this.editandoDesc = true;
   }
+
   guardarDescripcion() {
     this.descripcion = this.nuevaDescripcion;
     this.editandoDesc = false;
   }
+
   cancelarDesc() { 
     this.editandoDesc = false; 
   }
 
   // Lógica para IMAGEN AVATAR
-  alSeleccionarArchivo(event: any) {
+  SeleccionarArchivo(event: any) {
     const archivo = event.target.files[0]; 
     
     if (archivo) {
@@ -69,7 +72,7 @@ export class HomePage {
 
   // Lógica para el Celular
   abrirEdicionCel() {
-    this.nuevoCelular = this.celular === 'Sin número' ? '' : this.celular;
+    this.nuevoCelular = this.celular ;
     this.editandoCel = true;
     this.editando = false;
     this.editandoDesc = false;
@@ -78,27 +81,30 @@ export class HomePage {
   guardarCelular() {
     // VALIDACIONES
     const regexSoloNumeros = /^[0-9]+$/;
-    
-    if (!this.nuevoCelular) {
-      alert('El campo no puede estar vacío');
+    const tel = this.nuevoCelular.trim();
+
+    if (!tel) {
+      this.mensajeError = 'El campo no puede estar vacío';
       return;
     }
     
     if (!regexSoloNumeros.test(this.nuevoCelular)) {
-      alert('Por favor, ingresa solo números');
+      this.mensajeError = ('Por favor, ingresa solo números');
       return;
     }
 
-    if (this.nuevoCelular.length < 7 || this.nuevoCelular.length > 10) {
-      alert('El número debe tener entre 7 y 10 dígitos');
+    if (tel.length !== 10) {
+      this.mensajeError = ('El número debe tener 10 dígitos');
       return;
     }
 
+    this.mensajeError = ''
     this.celular = this.nuevoCelular;
     this.editandoCel = false;
   }
 
   cancelarCel() {
+    this.mensajeError = '';
     this.editandoCel = false;
   }
 }

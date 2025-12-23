@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary">
+  <ion-toolbar color="secondary">
     <ion-title >
       Componentes Ionic
     </ion-title>
@@ -13,9 +13,10 @@
     <img [src]="imagenAvatar" alt="Avatar" />
   </ion-avatar>
 
-  <div *ngIf="!editando && !editandoDesc">
+  <div *ngIf="!editando && !editandoDesc && !editandoCel">
     <h2>{{ nombreUsuario }}</h2>
      <p>{{ descripcion }}</p>
+     <p>{{ celular }}</p>
 
     <!-- icono -->
       <div class="ion-margin-bottom" style="color: #8f1515; font-size: 20px;">
@@ -23,26 +24,26 @@
       </div>
 
     <!-- Boton editar nombre de usuario -->
-    <ion-button (click)="abrirEdicion()" color ="tertiary" expand="block">
+    <ion-button (click)="abrirEdicion()" color ="secondary" expand="block">
       <ion-icon slot="start" name="create" ></ion-icon>
       EDITAR NOMBRE
     </ion-button>
 
     <!-- Boton editar el numero celular -->
-    <ion-button (click)="abrirEdicionCel()" color="tertiary" expand="block">
+    <ion-button (click)="abrirEdicionCel()" color="secondary" expand="block">
       <ion-icon slot="start" name="call"></ion-icon>
       EDITAR NUMERO CELULAR
     </ion-button>
 
     <!-- Boton editar descripción de usuario -->
-    <ion-button (click)="abrirEdicionDesc()" color="tertiary" expand="block">
+    <ion-button (click)="abrirDesc()" color="secondary" expand="block">
       <ion-icon slot="start" name="pencil" ></ion-icon>
       EDITAR DESCRIPCION
     </ion-button>
 
     <!-- Boton editar imagen de avatar -->
-    <input type="file" #fileInput (change)="alSeleccionarArchivo($event)" accept="image/*" style="display: none;">
-    <ion-button (click)="fileInput.click()" color ="tertiary" expand="block">
+    <input type="file" #fileInput (change)="SeleccionarArchivo($event)" accept="image/*" style="display: none;">
+    <ion-button (click)="fileInput.click()" color ="secondary" expand="block">
       <ion-icon slot="start" name="camera" expand="SUBIR IMAGEN"></ion-icon>
       SUBIR IMAGEN
     </ion-button>
@@ -78,11 +79,17 @@
       </ion-input>
     </ion-item>
     
+    <p *ngIf="mensajeError" style="color: var(--ion-color-danger); font-size: 14px; text-align: left; margin-left: 16px;">
+      {{ mensajeError }}
+    </p>
+
     <ion-button color="success" (click)="guardarCelular()">
-      <ion-icon slot="start" name="save"></ion-icon> ACEPTAR
+      <ion-icon slot="start" name="save"></ion-icon> 
+      ACEPTAR
     </ion-button>
     <ion-button color="danger" (click)="cancelarCel()">
-      <ion-icon slot="start" name="close-circle"></ion-icon> CANCELAR
+      <ion-icon slot="start" name="close-circle"></ion-icon> 
+      CANCELAR
     </ion-button>
   </div>
 
@@ -102,6 +109,5 @@
       CANCELAR
     </ion-button>
   </div>
-
 </ion-content>
 
