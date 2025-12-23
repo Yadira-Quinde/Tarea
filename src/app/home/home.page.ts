@@ -18,7 +18,7 @@ export class HomePage {
   nuevaDescripcion: string = '';
   editandoDesc: boolean = false;
 
-  celular: string = 'Agregar celular';
+  celular: string = 'Agregar célular';
   nuevoCelular: string = '';
   editandoCel: boolean = false;
 
@@ -31,7 +31,7 @@ export class HomePage {
     this.nuevoNombre = this.nombreUsuario;
     this.editando = true;
   }
-  
+
   guardarNombre() {
     this.nombreUsuario = this.nuevoNombre;
     this.editando = false;
